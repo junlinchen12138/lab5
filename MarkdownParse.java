@@ -68,7 +68,8 @@ public class MarkdownParse {
 
             if (!checkExtension(markdown.substring(openParen +1, closeParen)) && openParen-nextCloseBracket==1)
             {
-                toReturn.add(markdown.substring(openParen + 1, closeParen));
+                if(markdown.substring(openParen + 1, closeParen).indexOf(".")!=-1)
+                    toReturn.add(markdown.substring(openParen + 1, closeParen));
             }
             currentIndex = closeParen + 1;
             // if(currentIndex < prevIndex || nextCloseBracket < prevCloseBracket ||
