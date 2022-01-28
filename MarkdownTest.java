@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class MarkdownParseTest {
+public class MarkdownTest {
     @Test
     public void addition() {
         assertEquals(2, 1 + 1);
