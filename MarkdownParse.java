@@ -50,20 +50,31 @@ public class MarkdownParse {
         int openParen = markdown.indexOf("(");
         int closeParen = 0;
         while(currentIndex < markdown.length()) {
+            int prevIndex = currentIndex;
+            int prevOpenBracket = nextOpenBracket;
+            int prevCloseBracket = nextCloseBracket;
+            int prevOpenParen = openParen;
+            int prevCloseParen = closeParen;
+
             if (nextCloseBracket > openParen) break;
             nextOpenBracket = markdown.indexOf("[", currentIndex);
             nextCloseBracket = markdown.indexOf("]", nextOpenBracket);
             openParen = markdown.indexOf("(", nextCloseBracket);
             closeParen = markdown.indexOf(")", openParen);
+            if(nextOpenBracket == -1 || nextCloseBracket == -1 || 
+            openParen < prevOpenParen || closeParen < prevCloseParen){
+                break;
+            }
 
             if (!checkExtension(markdown.substring(openParen +1, closeParen)) && openParen-nextCloseBracket==1)
             {
                 toReturn.add(markdown.substring(openParen + 1, closeParen));
             }
             currentIndex = closeParen + 1;
-            if(nextOpenBracket == -1 && nextCloseBracket == -1){
-                break;
-            }
+            // if(currentIndex < prevIndex || nextCloseBracket < prevCloseBracket ||
+            // nextCloseBracket < prevCloseBracket || openParen < prevOpenParen){
+            //     break;
+            // }
         }
         return toReturn;
     }
