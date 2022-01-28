@@ -50,6 +50,7 @@ public class MarkdownParse {
         int openParen = markdown.indexOf("(");
         int closeParen = 0;
         while(currentIndex < markdown.length()) {
+            // Fix for tests 2 and 8
             int prevIndex = currentIndex;
             int prevOpenBracket = nextOpenBracket;
             int prevCloseBracket = nextCloseBracket;
@@ -61,6 +62,8 @@ public class MarkdownParse {
             nextCloseBracket = markdown.indexOf("]", nextOpenBracket);
             openParen = markdown.indexOf("(", nextCloseBracket);
             closeParen = markdown.indexOf(")", openParen);
+
+            // Fix for tests 2 and 8
             if(nextOpenBracket == -1 || nextCloseBracket == -1 || 
             openParen < prevOpenParen || closeParen < prevCloseParen){
                 break;
@@ -72,10 +75,6 @@ public class MarkdownParse {
                     toReturn.add(markdown.substring(openParen + 1, closeParen));
             }
             currentIndex = closeParen + 1;
-            // if(currentIndex < prevIndex || nextCloseBracket < prevCloseBracket ||
-            // nextCloseBracket < prevCloseBracket || openParen < prevOpenParen){
-            //     break;
-            // }
         }
         return toReturn;
     }
