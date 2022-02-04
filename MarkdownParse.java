@@ -56,7 +56,7 @@ public class MarkdownParse {
             int prevCloseBracket = nextCloseBracket;
             int prevOpenParen = openParen;
             int prevCloseParen = closeParen;
-
+	    // make sure the bracket is before parenthesis
             if (nextCloseBracket > openParen) break;
             nextOpenBracket = markdown.indexOf("[", currentIndex);
             nextCloseBracket = markdown.indexOf("]", nextOpenBracket);
